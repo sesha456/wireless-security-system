@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Circuit Diagram and Description</title>
+    <link rel="stylesheet" href="wirelesscss/all.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h3>Description of the components</h3>
+    <ol>
+      <li><strong>Encoder</strong></li>
+      <p>HT12E is a 2 12 series encoder IC (Integrated Circuit) for remote control applications. It is commonly used for radio frequency (RF) applications. By using the paired HT12E encoder and HT12D decoder we can easily transmit and receive 12 bits of parallel data serially. HT12E simply converts 12 bit parallel data in to serial output which can be transmitted through a RF transmitter.433MHz ---> <a class="b1"href="https://www.farnell.com/datasheets/1899539.pdf">Datasheet</a></p>
+      <li><strong>Transmitter</strong></li>
+      <p>One of the easily available transmitters is 433MHz transmitter module. This Module has a carrier frequency of 433MHz. This module has a build in pass band modulation for wireless modulation. ---> <a class="b1"href="https://www.elementzonline.com/downloads/RF_Based_Wireless_Remote.pdf">Datasheet</a></p>
+      <li><strong>Antenna</strong></li>
+      <p>The antenna used here is the 15cm single stand wire, which will give us a range of 20 Meters for the transmission of the signal.</p>
+      <li><strong>Reciever</strong></li>
+      <p>433MHz receiver module is the counter part of 433MHz transmitter module. Similar to the transmitter module, it is one of the easily available receivers in the market.It demodulates the received signal before sending bit streams to RF decoder chip ---> <a class="b1"href="https://www.elementzonline.com/downloads/RF_Based_Wireless_Remote.pdf">Datasheet</a></p>
+      <li><strong>PIR Sensors</strong></li>
+      <p>A passive infrared sensor is an electronic sensor that measures infrared light radiating from objects in its field of view. They are most often used in PIR-based motion detectors. PIR sensors are commonly used in security alarms and automatic lighting applications ---> <a class="b1"href="https://cdn-learn.adafruit.com/downloads/pdf/pir-passive-infrared-proximity-motion-sensor.pdf">Datasheet</a></p>
+      <li><strong>Decoder</strong></li>
+      <p>HT12-D is the counter part of HT12-E encoder. It is used to decode the signal generated in the HT12E encoder. It decodes the signal into 12 bits parallelly sent data. ---> <a class="b1"href="http://www.farnell.com/datasheets/57850.pdf">Datasheet</a></p>
+      <li><strong>555 Timer</strong></li>
+      <p>The 555 timer IC is an integrated circuit used in a variety of timer, pulse generation, and oscillator applications. The 555 can be used to provide time delays, as an oscillator, and as a flip-flop element. Derivatives provide two or four timing circuits in one package.There are two 555 timers,one for blinking the LED at low frequency,and the other for generating the audio frequency signal(1KHz) ---> <a class="b1"href="http://www.ti.com/lit/ds/symlink/ne555.pdf">Datasheet</a></p>
+      <li><strong>AT89S52/AT89C52</strong></li>
+      <p>The AT89S52 is a low-power, high-performance CMOS 8-bit microcontroller with 8Kbytes of in-system programmable Flash memory. The device is manufactured using Atmel’s high-density nonvolatile memory technology and is compatible with the indus-try-standard 80C51 instruction set and pinout. The on-chip Flash allows the program memory to be reprogrammed in-system or by a conventional nonvolatile memory pro-grammer. By combining a versatile 8-bit CPU with in-system programmable Flash ona monolithic chip, the Atmel AT89S52 is a powerful microcontroller which provides a highly-flexible and cost-effective solution to many embedded control applications.The AT89S52 provides the following standard features: 8K bytes of Flash, 256 bytesof RAM, 32 I/O lines, Watchdog timer, two data pointers, three 16-bit timer/counters, a six-vector two-level interrupt architecture, a full duplex serial port, on-chip oscillator,and clock circuitry. In addition, the AT89S52 is designed with static logic for operationdown to zero frequency and supports two software selectable power saving modes.The Idle Mode stops the CPU while allowing the RAM, timer/counters, serial port, andinterrupt system to continue functioning. The
+Power-down mode saves the RAM con-tents but freezes the oscillator, disabling all other chip functions until the next interruptor hardware reset.The AT89S52 detects the side of motion from RF Decoder. ---> <a class="b1"href="http://ww1.microchip.com/downloads/en/devicedoc/doc1919.pdf">Datasheet</a></p>
+      <li><strong>16*2 LCD Display</strong></li>
+      <p>We come across LCD displays everywhere around us. Computers, calculators, television sets, mobile phones, digital watches use some kind of display to display the time. An LCD is an electronic display module which uses liquid crystal to produce a visible image. The 16×2 LCD display is a very basic module commonly used in DIYs and circuits. The 16×2 translates of a display 16 characters per line in 2 such lines. In this LCD each character is displayed in a 5×7 pixel matrix.It displays messages given by the MCU ---> <a class="b1"href="https://www.sparkfun.com/datasheets/LCD/ADM1602K-NSW-FBS-3.3v.pdf">Datasheet</a></p>
+      <li><strong>Node MCU</strong></li>
+      <p>Node MCU being an open source firmware helps us to build IoT products. This is connected to our receiver hardware . Node MCU is coded using Arduino IDE , to read the data from the buffer and decode it and upload the information of required parameters onto the cloud.Node MCU is a Wi-Fi module.We have made use of Blynk app for the Node MCU to alert the user. ---> <a class="b1"href="https://www.handsontec.com/pdf_learn/esp8266-V10.pdf">Datasheet</a></p>
+    </ol>
+    <h3>Working</h3>
+    <ol>
+      <li>Transmitter</li>
+      <p>
+There are five circuits constructed in total. 4 of these circuits are for the 4 transmitter and the fifth circuit is for the receiver. Each circuit is built around an IC. Output of a PIR sensor is given to either of the data input AD8, AD9, AD10 or AD11 (pin 10,11,12 or 13) of the HT12E after inverting it with transistor T1, T2, T3 or T4. The Diodes D1 or D2 connects Transmission enable (TE complement) Pin with the Data Input pin, so that the both pins get input from the sensor at the same time.
+LED is connected to collector output of the transmitter, so that it blinks when PS1 sensor output goes high. Address pins from A0 to A7 are grounded to set the address
+00 (00000000b). Serial data output Dout (pin 17) is given to as data input to 434MHz RF Tx module. This circuit is powered with a 6V battery.
+When the PIR of transmitter 1, PS1 detects motion, its output goes high. T1 conducts and LED1 Blinks. Pins AD8 and TE-complement of IC1 are pulled low together through the diodes D1 and D2. And the other pins are high. Due to this the transmitter transfers data bits as 1110 for the transmitter 1. The table below gives the different data transmitted.</p>
+      <li>Reciever</li>
+      <p>The Receiver is built using 434MHz RF Rx module, RF decoder chip HT12D, AT89S52 MCU and Multivibrators using 555 timer. Serial data output from 434 RX module is given to the input pin 14 of HT12D decoder.
+Address pins A0 through A7 of HT12 D are connected to ground to set the same receiving address (0000 0000b) as encoder. A LED is connected to VT pin that blinks when the data is received. This output is inverted using a transistor and given to
+external interrupt pin EX1 of AT89S52. Data output pins D8 to D11 are connected to pins P1.0 to P1.3, respectively.
+The LCD data pins D0 to D7 are connected to port P0 of At89S52 and the pins RS and EN are connected to P2.0 ansd2.1 . Present VR1 is connected to pin3 to vary LCD brightness. Backlight LED pins15 and 16 are connected to +5 V via R23 and ground respectively to turn on LCD backlight.
+There are 2 multivibrators circuits. Both are build using IC NE555 and configured in astable mode. Reset pin4 of the both multivibrators are controlled by MCU port pins P2.2 and 2.3.
+When sensor detects motion, data is transmitted through RF Tx. This data is sent to decoder which detects valid address indicated through blinking of LED. The detector branches the data to different data pins. When validity signal is high, MCU gets interrupt signal. The bit pattern is received in the port P1 and based on the bit pattern it will decided which PIR is detected and display it on the LCD screen.
+The multivibrator that flashes LED has a flashing rate of 2 Hz. The resistors and capacitors are chosen to give the desired flashing rate.
+The other multivibrator generates 1KHZ, audio tone siren through the speaker (LS1). The resistors and capacitors are again chosen to give the desired result.
+When a PIR sensor detects the signal, the output remains high for around 5 to10 seconds because of the slower response. The siren and LED continues flashing for about 10 seconds. The message for which PIR detects will be displayed in the LCD display. Then the siren and LED turn off.</p>
+
+    </ol>
+    <a class="b1 hr"href="diagrams.html">For Circuit diadrams please click here</a>
+  </body>
+</html>

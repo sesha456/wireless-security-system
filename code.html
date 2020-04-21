@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Code</title>
+    <link rel="stylesheet" href="wirelesscss/all.css">
+    <link rel="icon" href="favicon2.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h1>Code using Embedded-C</h1>
+    <h2>Use it in keiluvision5 </h2>
+    <p>#include<\\reg51.h> </p><p>#include <\string.h></p>
+<p>sbit rs = P2^0; // declare P2.0 as rs pin</p>
+<p>sbit en = P2^1; // declare p2.1 as enable pin sbit buz = P2^3;</p>
+<p>sbit led = P2^2;</p>
+<p>unsigned char byte = 0xFF ;</p>
+<p>void lcd_delay() // delay for lcd busy {</p>
+<p>int i;
+<p>for(i=0;i<\2000;i++); }</p>
+<p>  ///////// // function to send command to LCD //////////////////////// void lcd_send_cmd(unsigned char a)</p>
+<p>{</p>
+<p>lcd_delay(); // check for LCD is busy or not rs = 0; // clear rs pin for command</p>
+<p>P0 = a; // send command character</p>
+<p>en = 1; // strob LCD
+<p>en = 0;</p>
+<p>}</p>
+<p>///////////////////////// function to send data to LCD /////////////// void lcd_send_data(unsigned char b)</p>
+<p>{</p>
+<p>lcd_delay(); // check for LCD is busy or not rs = 1; // set rs pin for data</p>
+<p>P0 = b; // send data character en = 1; // strob LCD</p>
+<p>en = 0;</p>
+<p>}</p>
+<p>//////////////// function to display complete message ////////////// void lcd_display_string(char *s) {</p>
+<p>unsigned int l,z;</p>
+<p>l = strlen(s); // find out length of message for(z=0;z<//l;z++) // for complete length of message</p>
+<p>{</p>
+<p>lcd_send_data(*s); // display all characters</p>
+<p>s++; }</p>
+<p>}</p>
+<p>//////////////// function to initialize LCD ///////////////////</p>
+<p>void lcd_init()</p>
+<p> {</p>
+<p>lcd_send_cmd(0x3E); // configure LCD as 8x5, 11 bits lcd_send_cmd(0x0E); // screen ON, cursor OFF</p>
+<p>lcd_send_cmd(0x01); // clear LCD memory, clear screen, home cursor lcd_display_string("WirelessSecurity");</p>
+<p> lcd_send_cmd(0xC0); lcd_display_string("system with PIR");</p>
+<p>}</p>
+<p> void delay() {</p>
+<p>int y,z; for(y=0;y<//100;y++)</p>
+<p>for(z=0;z<//1000;z++); }</p>
+<p>////////////// function to generate approx. 10 sec delay with 12 MHz crystal//// void delay_10s()</p>
+<p>{</p>
+<p>int y,z;</p>
+<p>for(y=0;y<//200;y++) for(z=0;z<//10000;z++); }</p>
+<p> ////// interrupt subroutine to get digital input from P1 //////////////////// void ext_int() interrupt 2</p>
+<p>{</p>
+<p>byte = P1; // get digital input</p>
+<p>EA = 0; // disable further interrupt</p>
+<p> delay(); // debounce delay led = 1; // start LED blinking buz = 1; // start siren</p>
+<p>}</p>
+<p>///////////////// main function ////////////////////////////// void main()</p>
+<p>{</p>
+<p>P1 = 0xFF; // P1 as input port</p>
+<p>P2 = 0x00; // P2 P0 as output port</p>
+<p>P0 = 0x00;</p>
+<p>IE = 0x84; // enable external interrupt</p>
+<p>P3 = 0x08;</p>
+<p>lcd_init(); // initialize LCD</p>
+<p>while(1) {</p>
+<p>while(byte==0xFF); // wait till no change in digital input switch(byte) // when digital input is received</p>
+<p>{ // display message on LCE case 0xF7: // if pin P1.3 is low</p>
+<p>lcd_send_cmd(0x01); // clear LCD and lcd_display_string("IntruderDetected"); // display message lcd_send_cmd(0xC0);</p>
+<p>lcd_display_string("from back side");</p>
+<p>break;</p>
+<p>case 0xFE: // if pin P1.0 is low</p>
+<p>lcd_send_cmd(0x01); // clear LCD and lcd_display_string("IntruderDetected");// display message lcd_send_cmd(0xC0);</p>
+<p>lcd_display_string("from front side");</p>
+<p>break;</p>
+<p>case 0xFD: // same for pin P1.1</p>
+<p>lcd_send_cmd(0x01); lcd_display_string("IntruderDetected"); lcd_send_cmd(0xC0); lcd_display_string("from left side"); break;</p>
+<p>case 0xFB: // and pin P1.2 lcd_send_cmd(0x01);</p>
+<p>lcd_display_string("IntruderDetected"); lcd_send_cmd(0xC0);</p>
+<p>lcd_display_string("from right side");</p>
+<p>break; }</p>
+<p>byte = 0xFF; // reinitialize byte as all 1 delay_10s(); // wait for 10 sec to get ready</p>
+<p>led = 0; // stop LED blinking</p>
+<p>buz = 0; // turn OFF siren</p>
+<p>EA = 1; // enable external interrupt again</p>
+<p>} }</p>
+
+  </body>
+</html>

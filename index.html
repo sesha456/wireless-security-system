@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Wireless Security System Using PIR Sensors</title>
+    <link rel="stylesheet" href="wirelesscss/all.css">
+    <link rel="icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="">
+      <h1><center>Wireless Security System Using PIR Sensors</center></h1>
+      <h3>Problem Defnition</h3>
+      <p>Our objective is to build a wireless security system with the help of PIR sensors.PIR sensors detect animal/human movement in a specific range of about 10m.It detects infrared radiation from the human body and causes the pyroelectric device to generate a sudden electrical signal which is indicated by LEDS.The signal is sent to the microcontroller AT89S52,decoded and available for the user to be alert through an alarm.We shall also program an IOT medium through a user friendly app like Blynk or any IOT platform like Ubidots or Adafruit to generate this notification.The basic idea is to build four transmitter circuits that have encoders and other electronic components,a receiver circuit that consists of
+  555 timers and decoders.The microcontroller is interfaced with this circuit so that after programming the circuit is ready and the data is ready to be sent.Through a Wi-Fi module like Nodemcu,the user can be alerted when the data is available in an IOT platform.</p>
+    </div>
+    <h3>Block diagram for the entire system</h3>
+    <div class="c1">
+      <img src="transmitter block.png" alt="transmitter" height="250">
+      <img src="reciever block.png" alt="receiver" height="250">
+    </div>
+    <div class="">
+      <h3>Components Required for receiver</h3>
+      <table cellspacing = "20">
+        <tr>
+          <th>Components</th>
+          <th>Quantity Required</th>
+        </tr>
+        <tr>
+          <td>433Mhz receiver Module</td>
+          <td><center>1</center</td>
+        </tr>
+        <tr>
+          <td>HT12D Decoder</td>
+          <td><center>1</center</td>
+        </tr>
+        <tr>
+          <td>2N2222 Transistors</td>
+          <td><center>2</center</td>
+        </tr>
+        <tr>
+          <td>AT89S52 Microcontroller developement board</td>
+          <td><center>1</center</td>
+        </tr>
+        <tr>
+          <td>16*2 LCD display</td>
+          <td><center>1</center</td>
+        </tr>
+        <tr>
+          <td>Resistors(of different specifications)</td>
+          <td><center>As required</center</td>
+        </tr>
+        <tr>
+          <td>capacitors(of different specifications)</td>
+          <td><center>As required</center</td>
+        </tr>
+        <tr>
+          <td>555 Timer</td>
+          <td><center>2</center</td>
+        </tr>
+        <tr>
+          <td>Node MCU</td>
+          <td><center>1</center</td>
+        </tr>
+        <tr>
+          <td>Speaker 0.3w</td>
+          <td><center>1</center</td>
+        </tr>
+        <tr>
+          <td>5V power supply</td>
+          <td><center>1</center</td>
+        </tr>
+        <tr>
+          <td>Variable resistance</td>
+          <td><center>1</center</td>
+        </tr>
+      </table>
+    </div>
+    <div class="">
+      <h3>Components Required for transmitter</h3>
+      <table cellspacing = "20">
+        <tr>
+          <th>Components</th>
+          <th>Quantity Required</th>
+        </tr>
+        <tr>
+          <td>433Mhz Transmitter Module</td>
+          <td><center>4</center</td>
+        </tr>
+        <tr>
+          <td>HT12E Encoder</td>
+          <td><center>4</center</td>
+        </tr>
+        <tr>
+          <td>2N2222 Transistors</td>
+          <td><center>4</center</td>
+        </tr>
+        <tr>
+          <td>1N4007 diodes</td>
+          <td><center>8</center</td>
+        </tr>
+        <tr>
+          <td>LED's</td>
+          <td><center>4</center</td>
+        </tr>
+        <tr>
+          <td>Resistors(of different specifications)</td>
+          <td><center>As required</center</td>
+        </tr>
+        <tr>
+          <td>capacitors(of different specifications)</td>
+          <td><center>As required</center</td>
+        </tr>
+        <tr>
+          <td>PIR sensors</td>
+          <td><center>4</center</td>
+        </tr>
+        <tr>
+          <td>6V power supply</td>
+          <td><center>1</center</td>
+        </tr>
+        <tr>
+          <td>Antenna wire</td>
+          <td><center>4</center</td>
+        </tr>
+      </table>
+    </div>
+    <p><em>For Circuit Diagram and working --> </em><a class="b1" href="cktdigram.html">Click here</a></p>
+  <h3>Done By</h3>
+  <p>This project was done by</p>
+  <ol>
+    <li>Sesha S Sankar</li>
+    <li>Viswesh K S</li>
+    <li>Vigneshwar S</li>
+    <li>S Sai Sriram</li>
+  </ol>
+  <p>For more information ----> <a class="b1" href="doneby.html">Details</a></p>
+  <h1>Code</h1>
+  <p>THis is our code please do verify it and use it</p>
+  <a class="b1" href="code.html">Keiluvision code</a>
+  </body>
+</html>
